@@ -5,18 +5,15 @@ mod utils;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args =  utils::get_args();
+    let args = utils::get_args();
     let url = "https://service.jiangsugqt.org".parse::<Url>().unwrap();
     let jar = Jar::default();
-    jar.add_cookie_str(
-        args.cookie.as_str(),
-        &url,
-    );
+    jar.add_cookie_str(args.cookie.as_str(), &url);
     let client_builder = reqwest::ClientBuilder::new()
         .cookie_store(true)
         .cookie_provider(std::sync::Arc::new(jar));
     let client = client_builder.build().unwrap();
-    let token = {
+    let lesson_info = {
         let html = client
             .get("https://service.jiangsugqt.org/youth/lesson/confirm")
             .send()
@@ -24,17 +21,29 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .text()
             .await?;
         println!("{}", html);
-        let match_str = "var token = \"(\\S)*\"";
-        let reg = Regex::new(match_str)?;
-        let caps = reg.captures(html.as_str()).expect("找不到 Token");
-        let token = String::from(caps.get(0).map_or("", |m| m.as_str()));
-        token
+        let lesson_reg = Regex::new(r#"'lesson_id':[0-9]+"#)?;
+        let lesson = lesson_reg
+            .captures(html.as_str())
+            .expect("找不到 lesson id");
+        let lesson = String::from(lesson.get(0).map_or("", |m| m.as_str()));
+        let lesson = lesson.get(12..).expect("lesson_id 处理异常").to_string();
+        let token_reg = Regex::new(r#"var token = "(\S)*""#)?;
+        let token = token_reg.captures(html.as_str()).expect("找不到 token");
+        let token = String::from(token.get(0).map_or("", |m| m.as_str()));
+        let token = token
             .get(13..(token.len() - 1))
-            .expect("Token 处理异常")
-            .to_string()
+            .expect("token 处理异常")
+            .to_string();
+        (lesson, token)
     };
-    println!("成功获取 Token: {}", token);
-    let req = [("token", token.as_str()), ("lesson_id", "122")];
+    println!(
+        "成功获取 lesson_id: {}, token: {}",
+        lesson_info.0, lesson_info.1
+    );
+    let req = [
+        ("token", lesson_info.1.as_str()),
+        ("lesson_id", lesson_info.0.as_str()),
+    ];
     let res = client
         .post("https://service.jiangsugqt.org/youth/lesson/confirm")
         .form(&req)
@@ -42,7 +51,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?
         .text()
         .await?;
-    let v: types::SignReq = serde_json::from_str(res.as_str()).unwrap();
+    let v: types::SignReq = serde_json::from_str(res.as_str()).expect(res.as_str());
     println!("{}", serde_json::to_string_pretty(&v).unwrap());
     return Ok(());
 }
