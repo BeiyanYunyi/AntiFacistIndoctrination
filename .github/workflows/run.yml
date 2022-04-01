@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v3
+        with:
+          path: ./target
+          key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo run -- -ic ${{ secrets.AFI_COOKIE }}
+      - run: cargo run -r -- -ic ${{ secrets.AFI_COOKIE }}
