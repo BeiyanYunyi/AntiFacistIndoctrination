@@ -8,7 +8,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = utils::get_args();
     let url = "https://service.jiangsugqt.org".parse::<Url>().unwrap();
     let jar = Jar::default();
-    jar.add_cookie_str(args.cookie.as_str(), &url);
+    let cookie_str = match args.cookie {
+        Some(cookie) => cookie.to_string(),
+        None => {
+            if !envmnt::exists("AFI_COOKIE") {
+                panic!("Error: Neither args nor environment variables were set.");
+            };
+            envmnt::get_or_panic("AFI_COOKIE")
+        }
+    };
+    jar.add_cookie_str(cookie_str.as_str(), &url);
     let client_builder = reqwest::ClientBuilder::new()
         .cookie_store(true)
         .cookie_provider(std::sync::Arc::new(jar));
