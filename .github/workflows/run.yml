@@ -4,11 +4,11 @@ name: CI
 
 jobs:
   build_and_test:
-    name: Rust project
+    name: Anti the Facists
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo run -r -c ${{ secrets.AFI_COOKIE }}
+      - run: cargo run -r -- -c ${{ secrets.AFI_COOKIE }}
