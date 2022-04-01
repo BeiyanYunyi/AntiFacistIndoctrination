@@ -29,7 +29,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .await?
             .text()
             .await?;
-        println!("{}", html);
+        if !args.in_action {
+            println!("{}", html);
+        }
         let lesson_reg = Regex::new(r#"'lesson_id':[0-9]+"#)?;
         let lesson = lesson_reg
             .captures(html.as_str())
@@ -45,10 +47,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .to_string();
         (lesson, token)
     };
-    println!(
-        "成功获取 lesson_id: {}, token: {}",
-        lesson_info.0, lesson_info.1
-    );
+    if !args.in_action {
+        println!(
+            "成功获取 lesson_id: {}, token: {}",
+            lesson_info.0, lesson_info.1
+        );
+    };
     let req = [
         ("token", lesson_info.1.as_str()),
         ("lesson_id", lesson_info.0.as_str()),

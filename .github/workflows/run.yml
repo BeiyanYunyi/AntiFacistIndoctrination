@@ -11,4 +11,4 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo run -r -- -c ${{ secrets.AFI_COOKIE }}
+      - run: cargo run -r -- -ic ${{ secrets.AFI_COOKIE }}
