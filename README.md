@@ -19,7 +19,7 @@ cargo run -r -- -c <YOUR_COOKIE_HERE>
 
 首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 AFI_COOKIE 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
 
-这以后，这个 Action 在每周一 18 时会运行，帮你完成任务。
+这以后，这个 Action 在每周一 18 时会运行，帮你完成任务。值得注意的是，你需要每 60 天手动开启一下这个 Action，不然会被 GitHub 暂停。
 
 ## 🌏 如何获取 Cookie
 
