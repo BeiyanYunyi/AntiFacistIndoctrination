@@ -14,7 +14,7 @@ pub async fn send_message(
     params.push(("title", title));
     if msg.is_some() {
         let msg = format!(
-            "这是一条来自 AFI 的推送消息，以下是正文：\n{}",
+            "这是一条来自 AFI 的推送消息，以下是正文：\n\n{}",
             msg.unwrap()
         );
         params.push(("desp", msg));
