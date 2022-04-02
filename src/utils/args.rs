@@ -10,7 +10,7 @@ use clap::Parser;
 pub struct Args {
     /// Cookie, 例: laravel_session=1145141919810889464364364
     #[clap(long, short)]
-    pub cookie: Option<String>,
+    pub cookie: String,
 
     /// 在 Action 中运行，不输出隐私信息
     #[clap(long, short)]
