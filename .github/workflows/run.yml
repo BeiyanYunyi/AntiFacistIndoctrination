@@ -24,6 +24,6 @@ jobs:
         with:
           toolchain: stable
       - run: |
-          token = ""
-          if test -n "${{ secrets.AFI_TOKEN }}"; then token = "-s ${{ secrets.AFI_TOKEN }}"; fi
+          token=""
+          if test -n "${{ secrets.AFI_TOKEN }}"; then token="-s ${{ secrets.AFI_TOKEN }}"; fi
           cargo run -r -- -ic ${{ secrets.AFI_COOKIE }} $token
