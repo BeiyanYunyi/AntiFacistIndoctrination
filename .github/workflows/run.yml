@@ -23,4 +23,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo run -r -- -ic ${{ secrets.AFI_COOKIE }}
+      - run: |
+          token = ""
+          if test -n "${{ secrets.AFI_TOKEN }}"; then token = "-s ${{ secrets.AFI_TOKEN }}"; fi
+          cargo run -r -- -ic ${{ secrets.AFI_COOKIE }} $token

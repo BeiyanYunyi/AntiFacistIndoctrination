@@ -15,6 +15,10 @@ pub struct Args {
     /// 在 Action 中运行，不输出隐私信息
     #[clap(long, short)]
     pub in_action: bool,
+
+    /// Server 酱的 SendKey，用于发送反法西斯成功通知
+    #[clap(long, short)]
+    pub sct_token: Option<String>,
 }
 
 pub fn get_args() -> Args {

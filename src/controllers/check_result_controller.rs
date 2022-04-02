@@ -34,6 +34,6 @@ pub async fn check_result_controller() -> Result<bool, Box<dyn std::error::Error
       panic!("无法查询成绩，请检查 Cookie 是否正确");
     }
   };
-  println!("本周任务已经被完成了，无需重复运行");
+  println!("本周任务已经被完成了");
   return Ok(true);
 }
