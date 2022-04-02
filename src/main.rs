@@ -12,20 +12,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
     let result = controllers::check_result_controller().await?;
     if result {
-        controllers::send_message_controller("运行结果：重复", Some(String::from("已经学过了")))
-            .await?;
+        controllers::send_message_controller("运行结果：重复", Some("本周已经学过了")).await?;
         return Ok(());
     }
     controllers::antifa_controller().await?;
     let result = controllers::check_result_controller().await?;
     if !result {
-        controllers::send_message_controller(
-            "运行结果：错误",
-            Some(String::from("学了却没有记录，建议自查")),
-        )
-        .await?;
-        panic!("学了却没有学习记录，建议自查");
+        const ERROR_MSG: &str = "请求发送了，查询时却没有学习记录，建议自行查询学习状态";
+        controllers::send_message_controller("运行结果：错误", Some(ERROR_MSG)).await?;
+        panic!("{}", ERROR_MSG);
     }
-    controllers::send_message_controller("运行结果：成功", Some(String::from("学习成功"))).await?;
+    controllers::send_message_controller("运行结果：成功", Some("学习成功")).await?;
     return Ok(());
 }

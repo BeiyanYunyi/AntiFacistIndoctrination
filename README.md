@@ -12,7 +12,7 @@
 ## 📦 单机使用方法
 
 ```bash
-cargo run -r -- -c <YOUR_COOKIE_HERE>
+cargo run -r -- -c <YOUR_COOKIE_HERE> [-s <YOUR_TOKEN_HERE>]
 ```
 
 ## 🏭 全自动完成
@@ -21,6 +21,10 @@ cargo run -r -- -c <YOUR_COOKIE_HERE>
 
 这以后，这个 Action 在每周一 18 时会运行，帮你完成任务。值得注意的是，你需要每 60 天手动开启一下这个 Action，不然会被 GitHub 暂停。
 
-## 🌏 如何获取 Cookie
+## 🍪 如何获取 Cookie
 
 见[此处](http://yuzai.xyz/%e9%9d%92%e5%b9%b4%e5%a4%a7%e5%ad%a6%e4%b9%a0%e6%8a%93%e5%8c%85%e6%95%99%e7%a8%8b/)，获得 `laravel_session=*` 后即可填入 Secrets。
+
+## 📱 Server 酱消息推送
+
+[注册 Server 酱](https://sct.ftqq.com/)并获取 `SendKey` ，然后为你 Fork 下的 Repo 设置一个名为 `AFI_TOKEN` 的 Secrets，里面填入 `SendKey`。这以后，本项目在运行后会使用 Server 酱向你推送结果。
