@@ -21,7 +21,9 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml', 'src/**/*.rs') }}
-      - uses: actions-rs/toolchain@v1
+      - name: Install toolchain
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - name: Build program
