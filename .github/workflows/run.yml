@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v3
+        id: cache
         with:
           path: |
             ~/.cargo/bin/
@@ -19,11 +20,15 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml', 'src/**/*.rs') }}
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: |
+      - name: Build program
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: cargo build -r
+      - name: Run program
+        run: |
           token=""
           if test -n "${{ secrets.AFI_TOKEN }}"; then token="-s ${{ secrets.AFI_TOKEN }}"; fi
-          cargo run -r -- -ic ${{ secrets.AFI_COOKIE }} $token
+          ./target/release/anti-facist-indoctrination -ic ${{ secrets.AFI_COOKIE }} $token
