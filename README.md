@@ -1,5 +1,7 @@
 # 🗺 Anti Facist Indoctrination
 
+![banner](https://socialify.git.ci/lixiang810/AntiFacistIndoctrination/image?description=1&font=KoHo&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
+
 这是一个江苏省青年大学习自动完成器。往下翻之前可以看一则苏联笑话：
 
 > 一所大学正在全力搜捕在校内张贴反法西斯标语的学生，请问这最有可能发生在何时何地？
