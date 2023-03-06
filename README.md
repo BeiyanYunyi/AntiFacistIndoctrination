@@ -32,7 +32,7 @@ cargo run -r -- -c <YOUR_COOKIE_HERE> [-s <YOUR_TOKEN_HERE>]
 
 ## 🍪 如何获取 Cookie
 
-见[此处](http://yuzai.xyz/%e9%9d%92%e5%b9%b4%e5%a4%a7%e5%ad%a6%e4%b9%a0%e6%8a%93%e5%8c%85%e6%95%99%e7%a8%8b/)，获得 `laravel_session=*` 后即可填入 Secrets。
+使用 HTTPCanary 之类的工具对江苏共青团的大学习页面进行抓包，在 Cookies 头中获得 `laravel_session=*` 后即可填入 Secrets。
 
 ## 📱 Server 酱消息推送
 
