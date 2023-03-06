@@ -1,8 +1,8 @@
 # 🗺 Anti Facist Indoctrination
 
-## 2023-03-04 发现江苏共青团修改了学习方式，该项目暂时无法使用，正在进行修复。
-
 ![banner](https://socialify.git.ci/lixiang810/AntiFacistIndoctrination/image?description=1&font=KoHo&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
+
+## 2023-03-05 修正程序，适应新版大学习，请更新程序，否则可能无法使用
 
 这是一个江苏省青年大学习自动完成器。往下翻之前可以看一则苏联笑话：
 
