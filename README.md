@@ -40,7 +40,7 @@ cargo run -r -- -s SCU1234567890abcdef laravel_session=23333333333 laravel_sessi
 
 ## 🍪 如何获取 Cookie
 
-见[此处](https://yuzaii.github.io/archives/c59a0c1a.html)（备份见[此处](https://web.archive.org/web/20230306140515/https://yuzaii.github.io/archives/c59a0c1a.html)），获得 `laravel_session=*` 后即可填入 Secrets。
+见[此处](https://web.archive.org/web/20230306140515/https://yuzaii.github.io/archives/c59a0c1a.html)，获得 `laravel_session=*` 后即可填入 Secrets。
 
 ## 📱 Server 酱消息推送
 
