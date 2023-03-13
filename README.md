@@ -45,3 +45,5 @@ cargo run -r -- -s SCU1234567890abcdef laravel_session=23333333333 laravel_sessi
 ## 📱 Server 酱消息推送
 
 [注册 Server 酱](https://sct.ftqq.com/)并获取 `SendKey` ，然后为你 Fork 下的 Repo 设置一个名为 `AFI_TOKEN` 的 Secrets，里面填入 `SendKey`。这以后，本项目在运行后会使用 Server 酱向你推送结果。
+
+![Stargazers over time](https://starchart.cc/BeiyanYunyi/AntifacistIndoctrination.svg)]
