@@ -8,13 +8,12 @@ use clap::Parser;
 )]
 #[clap(version, author = "野兽先辈")]
 pub struct Args {
-  /// Cookie, 例: laravel_session=1145141919810889464364364
-  #[clap(long, short)]
-  pub cookie: String,
-
   /// Server 酱的 SendKey，用于发送反法西斯成功通知
   #[clap(long, short)]
   pub sct_token: Option<String>,
+
+  /// Cookie, 以空格间隔 例: laravel_session=1145141919810889464364364 laravel_session=11451419
+  pub cookie: Vec<String>,
 }
 
 pub fn get_args() -> Args {

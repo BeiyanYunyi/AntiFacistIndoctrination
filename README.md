@@ -17,7 +17,13 @@
 ## 📦 单机使用方法
 
 ```bash
-cargo run -r -- -c <YOUR_COOKIE_HERE> [-s <YOUR_TOKEN_HERE>]
+cargo run -r -- [-s <YOUR_TOKEN_HERE>] <YOUR_COOKIE_HERE>
+```
+
+其中 Cookie 可以是批量的，以空格分隔。例如：
+
+```bash
+cargo run -r -- -s SCU1234567890abcdef laravel_session=23333333333 laravel_session=114514
 ```
 
 ## 🏭 全自动完成
@@ -25,6 +31,8 @@ cargo run -r -- -c <YOUR_COOKIE_HERE> [-s <YOUR_TOKEN_HERE>]
 ### Fork / Star 都快大于 2 了，各位用之前能不能 Star 一下？
 
 首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 AFI_COOKIE 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
+
+或者如果你想批量完成，那就这样：`laravel_session=23333333333 laravel_session=114514`
 
 设置完之后，在 Repo 页面点击 Actions，按照里面的提示启用 Actions，否则 Action 不会运行。
 

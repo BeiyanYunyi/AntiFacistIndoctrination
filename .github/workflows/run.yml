@@ -33,4 +33,4 @@ jobs:
         run: |
           token=""
           if test -n "${{ secrets.AFI_TOKEN }}"; then token="-s ${{ secrets.AFI_TOKEN }}"; fi
-          ./target/release/anti-facist-indoctrination -c ${{ secrets.AFI_COOKIE }} $token
+          ./target/release/anti-facist-indoctrination $token ${{ secrets.AFI_COOKIE }} 

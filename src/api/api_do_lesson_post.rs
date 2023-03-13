@@ -5,9 +5,10 @@ use crate::{
 
 pub async fn api_do_lesson_post(
   lesson_id: u32,
+  cookie: &str,
 ) -> Result<ApiDoLessonRes, Box<dyn std::error::Error>> {
   let req = ApiDoLessonReq { lesson_id };
-  let client = utils::get_client().await?;
+  let client = utils::get_client(cookie).await?;
   let html = client
     .post("https://service.jiangsugqt.org/api/doLesson")
     .json(&req)

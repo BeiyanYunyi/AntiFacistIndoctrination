@@ -13,26 +13,42 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ——《国家与革命》，列宁
         "#
   );
-  let result = controllers::check_result_controller().await?;
-  match result {
-    Studied => {
-      controllers::send_message_controller("运行结果：重复", Some("本周已经学过了")).await?;
-      return Ok(());
-    }
-    NotStudied(id) => {
-      controllers::antifa_controller(id).await?;
-      let result = controllers::check_result_controller().await?;
-      match result {
-        Studied => {
-          controllers::send_message_controller("运行结果：成功", Some("学习成功")).await?;
-          return Ok(());
-        }
-        NotStudied(_) => {
-          const ERROR_MSG: &str = "请求发送了，查询时却没有学习记录，建议自行查询学习状态";
-          controllers::send_message_controller("运行结果：错误", Some(ERROR_MSG)).await?;
-          panic!("{}", ERROR_MSG);
+  let args = utils::get_args();
+  if args.cookie.is_empty() {
+    println!("请在命令行中输入cookie");
+    return Ok(());
+  }
+  let mut res_ary = Vec::new();
+  let len = args.cookie.len();
+  for ck in args.cookie {
+    let result = controllers::check_result_controller(ck.as_str()).await?;
+    match result {
+      Studied => {
+        res_ary.push("重复");
+      }
+      NotStudied(id) => {
+        controllers::antifa_controller(id, ck.as_str()).await?;
+        let result = controllers::check_result_controller(ck.as_str()).await?;
+        match result {
+          Studied => {
+            res_ary.push("成功");
+          }
+          NotStudied(_) => {
+            res_ary.push("请求发送了，查询时却没有学习记录，建议自行查询学习状态");
+          }
         }
       }
     }
+    if len > 1 && res_ary.len() < len {
+      println!("等待 3 秒后继续运行下一个任务");
+      tokio::time::sleep(std::time::Duration::from_secs(3)).await;
+    }
   }
+  println!("运行结果：{:?}", res_ary);
+  controllers::send_message_controller(
+    format!("运行结果：{:?}", res_ary).as_str(),
+    Some(format!("{:?}", res_ary).as_str()),
+  )
+  .await?;
+  Ok(())
 }

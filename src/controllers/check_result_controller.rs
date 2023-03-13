@@ -5,8 +5,10 @@ pub enum CheckResultRes {
   Studied,
 }
 
-pub async fn check_result_controller() -> Result<CheckResultRes, Box<dyn std::error::Error>> {
-  let cjd_res = api::api_cjd_list_post(1, 20).await;
+pub async fn check_result_controller(
+  cookie: &str,
+) -> Result<CheckResultRes, Box<dyn std::error::Error>> {
+  let cjd_res = api::api_cjd_list_post(1, 20, cookie).await;
   match cjd_res {
     Ok(res) => {
       if let Some(bb) = res.data.get(0) {
