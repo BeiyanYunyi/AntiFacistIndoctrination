@@ -57,7 +57,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     match res {
       Success(id) =>
         images_str.push_str(
-          format!("![screenshot](https://h5.cyol.com/special/daxuexi/{:?}/images/end.jpg)\n\n", id)
+          format!("![screenshot](https://h5.cyol.com/special/daxuexi/{}/images/end.jpg)\n\n", id)
             .as_str()
         ),
       _ => continue
@@ -65,7 +65,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   }
   controllers::send_message_controller(
     format!("运行结果：{:?}", res_ary).as_str(),
-    Some(format!("{:?}\n\n{:?}", res_ary, images_str).as_str()),
+    Some(format!("{:?}\n\n{}", res_ary, images_str).as_str()),
   )
     .await?;
   Ok(())
