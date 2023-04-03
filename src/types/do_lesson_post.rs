@@ -8,7 +8,7 @@ pub struct ApiDoLessonReq {
 #[derive(Deserialize, Serialize)]
 pub struct ApiDoLessonResData {
   title: String,
-  url: String,
+  pub(crate) url: String,
 }
 
 #[derive(Deserialize, Serialize)]
@@ -16,5 +16,5 @@ pub struct ApiDoLessonRes {
   message: String,
   status: u32,
   redirect: String,
-  data: ApiDoLessonResData,
+  pub(crate) data: ApiDoLessonResData,
 }
