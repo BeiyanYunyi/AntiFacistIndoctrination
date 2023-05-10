@@ -12,7 +12,8 @@ pub struct Args {
 impl Args {
   pub fn parse() -> Self {
     let token = env::var("SCT_TOKEN").ok();
-    let cookie = env::var("COOKIE").unwrap_or("".into());
+    // Fallback to AFI_COOKIE to keep compatibility
+    let cookie = env::var("COOKIE").unwrap_or(env::var("AFI_COOKIE").unwrap_or("".into()));
     let cookie = cookie.split(" ").map(|s| s.to_owned()).collect();
     return Args {
       sct_token: token,
