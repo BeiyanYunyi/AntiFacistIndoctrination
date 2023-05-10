@@ -30,7 +30,7 @@ pub async fn api_cjd_list_post(
   match json_res {
     Ok(json) => Ok(json),
     Err(e) => {
-      println!("{:?}", e);
+      println!("{:?},{}", e, html);
       Err(Box::new(e))
     }
   }

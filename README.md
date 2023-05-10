@@ -37,7 +37,7 @@ cargo run -r
 
 ### Fork / Star 都快大于 2 了，各位用之前能不能 Star 一下？
 
-首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 AFI_COOKIE 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
+首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 `COOKIE` 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
 
 或者如果你想批量完成，那就这样：`laravel_session=23333333333 laravel_session=114514`
 
