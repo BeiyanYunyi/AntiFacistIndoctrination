@@ -30,7 +30,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo build -r
       - name: Run program
-        run: |
-          token=""
-          if test -n "${{ secrets.AFI_TOKEN }}"; then token="-s ${{ secrets.AFI_TOKEN }}"; fi
-          ./target/release/anti-facist-indoctrination $token ${{ secrets.AFI_COOKIE }} 
+        run: ./target/release/anti-facist-indoctrination
+        env:
+          AFI_COOKIE: ${{ secrets.AFI_COOKIE }}
+          AFI_TOKEN: ${{ secrets.AFI_TOKEN }}
