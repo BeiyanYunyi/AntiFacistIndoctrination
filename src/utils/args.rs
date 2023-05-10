@@ -14,7 +14,10 @@ impl Args {
     let token = env::var("SCT_TOKEN").ok();
     // Fallback to AFI_COOKIE to keep compatibility
     let cookie = env::var("COOKIE").unwrap_or(env::var("AFI_COOKIE").unwrap_or("".into()));
-    let cookie = cookie.split(" ").map(|s| s.to_owned()).collect();
+    let cookie = match cookie.as_str() {
+      "" => Vec::new(),
+      _ => cookie.split(" ").map(|s| s.to_owned()).collect(),
+    };
     return Args {
       sct_token: token,
       cookie,
