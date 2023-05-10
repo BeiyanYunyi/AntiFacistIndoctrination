@@ -26,6 +26,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   }
   let mut res_ary = Vec::new();
   let len = args.cookie.len();
+  println!("共有 {} 个 Cookie", len);
   for ck in args.cookie {
     let result = controllers::check_result_controller(ck.as_str()).await?;
     match result {

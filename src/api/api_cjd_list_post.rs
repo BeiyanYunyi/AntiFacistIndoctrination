@@ -15,13 +15,13 @@ pub async fn api_cjd_list_post(
     .json(&req)
     .send()
     .await?;
-  let header: String = res
-    .headers()
-    .get("set-cookie")
-    .unwrap()
-    .to_str()?
-    .to_owned();
-  let new_cookie = String::from(header.split(";").next().unwrap());
+  let new_cookie = match res.headers().get("set-cookie") {
+    Some(v) => {
+      let header = v.to_str()?.to_owned();
+      String::from(header.split(";").next().unwrap())
+    }
+    None => String::from(""),
+  };
   if cookie != new_cookie {
     println!("检测到 Cookie 更新");
   }
