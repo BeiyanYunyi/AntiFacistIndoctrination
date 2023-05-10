@@ -28,7 +28,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let len = args.cookie.len();
   println!("共有 {} 个 Cookie", len);
   for ck in args.cookie {
-    println!("正在运行 {}", utils::sha512(ck.clone()));
+    println!("正在运行 {}", ck);
     let result = controllers::check_result_controller(ck.as_str()).await?;
     match result {
       Studied => {
