@@ -22,8 +22,8 @@
 
 AFI 使用两个环境变量，分别是：
 
-1. `COOKIE`，即你的 Cookie，格式为 `laravel_session=<YOUR_COOKIE_HERE>`，例如 `laravel_session=233333`。你可以使用多个 Cookie，以空格分隔，例如 `laravel_session=233333 laravel_session=114514`。
-2. `SCT_TOKEN`，Server 酱的 SendKey，用于推送结果。如果你不想使用 Server 酱，可以不设置这个环境变量。
+1. `AFI_COOKIE`，即你的 Cookie，格式为 `laravel_session=<YOUR_COOKIE_HERE>`，例如 `laravel_session=233333`。你可以使用多个 Cookie，以空格分隔，例如 `laravel_session=233333 laravel_session=114514`。
+2. `AFI_TOKEN`，Server 酱的 SendKey，用于推送结果。如果你不想使用 Server 酱，可以不设置这个环境变量。
 
 环境变量可以通过多种方式设置，方法视你的系统 / shell 而定，请自行查询相关资料。此外，AFI 也支持通过 `.env` 文件设置环境变量。将 `.env` 文件放置在你下面执行 cargo 命令的目录下即可。
 
@@ -37,7 +37,7 @@ cargo run -r
 
 ### Fork / Star 都快大于 2 了，各位用之前能不能 Star 一下？
 
-首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 `COOKIE` 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
+首先，Fork 这个 Repo。然后为这个 Repo 设置一个名为 `AFI_COOKIE` 的 Secrets，里面填入你的 Cookie，像这样：`laravel_session=2333333333333333333333333333333333333333`
 
 或者如果你想批量完成，那就这样：`laravel_session=23333333333 laravel_session=114514`
 
