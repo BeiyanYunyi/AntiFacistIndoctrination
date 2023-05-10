@@ -18,7 +18,9 @@ pub async fn api_cjd_list_post(
   let new_cookie = match res.headers().get("set-cookie") {
     Some(v) => {
       let header = v.to_str()?.to_owned();
-      String::from(header.split(";").next().unwrap())
+      let mut cookie = String::from(header.split(";").next().unwrap());
+      cookie.push_str(";");
+      cookie
     }
     None => String::from(""),
   };
