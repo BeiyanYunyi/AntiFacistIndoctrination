@@ -1,6 +1,7 @@
-use regex::Regex;
 use crate::controllers::CheckResultRes::{NotStudied, Studied};
-use crate::utils::StudyResult::{Unknown, Success, Duplicated};
+use crate::utils::StudyResult::{Duplicated, Success, Unknown};
+use dotenv::dotenv;
+use regex::Regex;
 
 mod api;
 mod controllers;
@@ -9,6 +10,9 @@ mod utils;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+  dotenv().ok();
+  pretty_env_logger::init();
+
   println!(
     r#"
 资产阶级国家的形式虽然多种多样，但本质是一样的：所有这些国家，不管怎样，归根到底一定都是资产阶级专政。
@@ -37,12 +41,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let hash = regex.captures(res.data.url.as_str());
             match hash {
               Some(cap) => res_ary.push(Success((cap[1]).to_string())),
-              None => res_ary.push(Success(String::new()))
+              None => res_ary.push(Success(String::new())),
             }
           }
-          NotStudied(_) => {
-            res_ary.push(Unknown)
-          }
+          NotStudied(_) => res_ary.push(Unknown),
         }
       }
     }
@@ -55,18 +57,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let mut images_str = String::new().to_owned();
   for res in &res_ary {
     match res {
-      Success(id) =>
-        images_str.push_str(
-          format!("![screenshot](https://h5.cyol.com/special/daxuexi/{}/images/end.jpg)\n\n", id)
-            .as_str()
-        ),
-      _ => continue
+      Success(id) => images_str.push_str(
+        format!(
+          "![screenshot](https://h5.cyol.com/special/daxuexi/{}/images/end.jpg)\n\n",
+          id
+        )
+        .as_str(),
+      ),
+      _ => continue,
     }
   }
   controllers::send_message_controller(
     format!("运行结果：{:?}", res_ary).as_str(),
     Some(format!("{:?}\n\n{}", res_ary, images_str).as_str()),
   )
-    .await?;
+  .await?;
   Ok(())
 }
