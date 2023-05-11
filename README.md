@@ -2,9 +2,13 @@
 
 ![banner](https://socialify.git.ci/lixiang810/AntiFacistIndoctrination/image?description=1&font=KoHo&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
 
-## 2023-03-05 修正程序，适应新版大学习，请更新程序，否则可能无法使用
+## 2023-05-11 停更说明
 
-## 2023-05-10 正在对新程序进行测试，请勿立即更新
+经抓包发现，现在的江苏青年大学习 Cookie 会很快失效，每次都需要走一遍微信登录流程，继续开发已无意义。本项目因此停止更新。
+
+纪念并祝福每一个不服从于法西斯的人。
+
+## 以下是原内容
 
 这是一个江苏省青年大学习自动完成器。往下翻之前可以看一则苏联笑话：
 
